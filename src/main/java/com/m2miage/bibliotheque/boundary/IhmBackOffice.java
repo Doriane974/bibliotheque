@@ -13,8 +13,9 @@ public class IhmBackOffice {
     @Autowired
     private GestionBackOffice gestionBackOffice;
 
+
     @GetMapping("/creer-usager")
-    public String afficherFormulaire() {
+    public String afficherFormulaireCreerUsager() {
         return "creerUsager";
     }
 
@@ -24,6 +25,18 @@ public class IhmBackOffice {
         model.addAttribute("message", message);
         return "resultatCreation";
     }
+
+    @GetMapping("/creer-oeuvre")
+    public String afficherFormulaireCreerOeuvre(){return "creerOeuvre";}
+
+    @PostMapping("/creer-oeuvre")
+    public String creerOeuvre(@RequestParam String titre, @RequestParam String auteur, Model model){
+        String message = gestionBackOffice.creerOeuvre(titre, auteur);
+        model.addAttribute("message", message);
+        return "resultatCreation";
+    }
+
+
 
 
 }
