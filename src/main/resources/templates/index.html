@@ -1,10 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Menu de la Bibliothèque</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #fef4f3; /* Couleur de fond légère */
+    }
+    h1 {
+      color: #795431; /* Couleur du titre */
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #e6caec; /* Couleur de fond des boutons */
+      color: #795431; /* Couleur du texte des boutons */
+      border: none;
+      border-radius: 5px; /* Coins arrondis */
+      transition: background-color 0.3s; /* Effet de transition */
+    }
+    button:hover {
+      background-color: #e89ef7; /* Couleur au survol */
+    }
+    /* Ajout d'une bordure et d'un ombre pour les boutons */
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
 </head>
 <body>
-
+<h1>Menu</h1>
+<button onclick="window.location.href='/creer-usager'">Créer Usager</button>
+<button onclick="window.location.href='/creer-oeuvre'">Créer Oeuvre</button>
 </body>
 </html>
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu de la Bibliothèque</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<h1>Menu</h1>
+<button onclick="window.location.href='/creer-usager'">Créer Usager</button>
+<button onclick="window.location.href='/creer-oeuvre'">Créer Oeuvre</button>
+</body>
+</html>
+-->
