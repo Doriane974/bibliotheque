@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Usager</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #fef4f3; /* Couleur de fond légère */
+        }
+        h1 {
+            color: #795431; /* Couleur du titre */
+            margin-bottom: 30px;
+        }
+        form {
+            background-color: #ffffff; /* Couleur de fond blanche pour le formulaire */
+            padding: 20px; /* Espacement intérieur */
+            border-radius: 10px; /* Coins arrondis */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            display: inline-block; /* Pour centrer le formulaire */
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0; /* Espacement vertical */
+            border: 1px solid #ccc; /* Bordure grise */
+            border-radius: 5px; /* Coins arrondis */
+            width: 200px; /* Largeur des champs */
+            transition: border-color 0.3s; /* Effet de transition */
+        }
+        input[type="text"]:focus {
+            border-color: #e89ef7; /* Couleur de la bordure au focus */
+            outline: none; /* Supprimer l'outline par défaut */
+        }
+        input[type="submit"] {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #e6caec; /* Couleur de fond des boutons */
+            color: #795431; /* Couleur du texte des boutons */
+            border: none;
+            border-radius: 5px; /* Coins arrondis */
+            transition: background-color 0.3s; /* Effet de transition */
+        }
+        input[type="submit"]:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        input[type="submit"]:hover {
+            background-color: #e89ef7; /* Couleur au survol */
+        }
+        table {
+            margin: 0 auto; /* Centrer le tableau */
+            width: 80%; /* Largeur du tableau */
+            border-collapse: collapse; /* Supprimer l'espacement entre les cellules */
+            background-color: #ffffff; /* Couleur de fond blanche pour le tableau */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            border-radius: 10px; /* Coins arrondis */
+            overflow: hidden; /* Pour arrondir les coins du tableau */
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+            color: #795431;
+        }
+        th {
+            background-color: #e6caec; /* Couleur d'arrière-plan pour les en-têtes */
+            font-weight: bold;
+        }
+        td {
+            border-bottom: 1px solid #e89ef7; /* Ligne de séparation entre les cellules */
+        }
+        tr:hover {
+            background-color: #f9e5fa; /* Couleur de fond au survol */
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            background-color: #e6caec; /* Couleur de fond des boutons */
+            color: #795431; /* Couleur du texte des boutons */
+            border: none;
+            border-radius: 5px; /* Coins arrondis */
+            transition: background-color 0.3s; /* Effet de transition */
+        }
+        button:hover {
+            background-color: #e89ef7; /* Couleur au survol */
+        }
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<h1>Modifier Usager</h1>
+<form action="/modifierUsager" method="post">
+    <input type="hidden" name="usagerId" th:value="${usager.id}">
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" th:value="${usager.nom}"><br>
+
+    <label for="prenom">Prénom:</label>
+    <input type="text" id="prenom" name="prenom" th:value="${usager.prenom}"><br>
+
+    <button type="submit">Enregistrer</button>
+</form>
+<button onclick="window.location.href='/liste-usagers'">Annuler</button>
+</body>
+</html>

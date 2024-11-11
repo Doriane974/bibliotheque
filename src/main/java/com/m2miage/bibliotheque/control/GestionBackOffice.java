@@ -105,4 +105,22 @@ public class GestionBackOffice {
     }
 
 
+    public void supprimerUsager(Long usagerId) {
+        usagerRepository.deleteById(usagerId);
+    }
+
+    public Usager obtenirUsager(Long usagerId) {
+        return usagerRepository.findById(usagerId)
+                .orElseThrow(() -> new RuntimeException("Usager not found"));
+    }
+
+    public void modifierUsager(Long usagerId, String nom, String prenom) {
+        Usager usager = obtenirUsager(usagerId);
+        if (!nom.isBlank()) usager.setNom(nom);
+        if (!prenom.isBlank()) usager.setPrenom(prenom);
+        usagerRepository.save(usager);
+    }
+
+
+
 }

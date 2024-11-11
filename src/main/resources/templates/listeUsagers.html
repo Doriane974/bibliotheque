@@ -74,6 +74,17 @@
     <td th:text="${usager.id}"></td>
     <td th:text="${usager.nom}"></td>
     <td th:text="${usager.prenom}"></td>
+    <td>
+      <form th:action="@{/supprimerUsager}" method="post">
+        <input type="hidden" name="usagerId" th:value="${usager.id}">
+        <button type="submit">Supprimer</button>
+      </form>
+    </td>
+    <td>
+      <a th:href="@{/modifierUsager(usagerId=${usager.id})}">
+        <button type="button">Modifier</button>
+      </a>
+    </td>
   </tr>
   </tbody>
 </table>

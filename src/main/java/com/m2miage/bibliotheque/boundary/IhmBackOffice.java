@@ -177,6 +177,31 @@ public class IhmBackOffice {
     }
 
 
+    // Delete a usager
+    @PostMapping("/supprimerUsager")
+    public String supprimerUsager(@RequestParam Long usagerId) {
+        gestionBackOffice.supprimerUsager(usagerId);
+        return "redirect:/liste-usagers";
+    }
+
+    // Show form to modify a usager
+    @GetMapping("/modifierUsager")
+    public String afficherModifierUsagerForm(@RequestParam Long usagerId, Model model) {
+        Usager usager = gestionBackOffice.obtenirUsager(usagerId);
+        model.addAttribute("usager", usager);
+        return "modifierUsager";
+    }
+
+    // Handle form submission for modifying a usager
+    @PostMapping("/modifierUsager")
+    public String modifierUsager(@RequestParam Long usagerId,
+                                 @RequestParam String nom,
+                                 @RequestParam String prenom) {
+        gestionBackOffice.modifierUsager(usagerId, nom, prenom);
+        return "redirect:/liste-usagers";
+    }
+
+
 
 
 }
