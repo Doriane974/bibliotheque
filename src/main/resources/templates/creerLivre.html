@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un Livre</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: #fef4f3; /* Couleur de fond légère */
+    }
+    h1 {
+      color: #795431; /* Couleur du titre */
+      margin-bottom: 30px;
+    }
+    form {
+      background-color: #ffffff; /* Couleur de fond blanche pour le formulaire */
+      padding: 20px; /* Espacement intérieur */
+      border-radius: 10px; /* Coins arrondis */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+      display: inline-block; /* Pour centrer le formulaire */
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0; /* Espacement vertical */
+      border: 1px solid #ccc; /* Bordure grise */
+      border-radius: 5px; /* Coins arrondis */
+      width: 200px; /* Largeur des champs */
+      transition: border-color 0.3s; /* Effet de transition */
+    }
+    input[type="text"]:focus {
+      border-color: #e89ef7; /* Couleur de la bordure au focus */
+      outline: none; /* Supprimer l'outline par défaut */
+    }
+    input[type="submit"] {
+      padding: 15px 30px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #e6caec; /* Couleur de fond des boutons */
+      color: #795431; /* Couleur du texte des boutons */
+      border: none;
+      border-radius: 5px; /* Coins arrondis */
+      transition: background-color 0.3s; /* Effet de transition */
+    }
+    input[type="submit"]:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    input[type="submit"]:hover {
+      background-color: #e89ef7; /* Couleur au survol */
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #e6caec; /* Couleur de fond des boutons */
+      color: #795431; /* Couleur du texte des boutons */
+      border: none;
+      border-radius: 5px; /* Coins arrondis */
+      transition: background-color 0.3s; /* Effet de transition */
+    }
+    button:hover {
+      background-color: #e89ef7; /* Couleur au survol */
+    }
+    /* Ajout d'une bordure et d'un ombre pour les boutons */
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Créer un Livre</h1>
+
+<form action="/creer-livre" method="post">
+  <label for="titre">Titre</label>
+  <input type="text" id="titre" name="titre" required>
+
+  <label for="auteur">Auteur</label>
+  <input type="text" id="auteur" name="auteur" required>
+
+  <label for="edition">Édition</label>
+  <input type="text" id="edition" name="edition" required>
+
+  <label for="dateParution">Date de Parution</label>
+  <input type="date" id="dateParution" name="dateParution" required>
+
+  <button type="submit">Créer le Livre</button>
+</form>
+
+<button onclick="window.location.href='/'">Retour menu</button>
+
+</body>
+</html>
