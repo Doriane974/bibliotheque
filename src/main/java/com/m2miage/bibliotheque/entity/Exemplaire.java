@@ -10,8 +10,8 @@ public class Exemplaire {
     private String etat; // "bon" ou "abimé"
     private String disponibilite; // "en rayon" ou "emprunté"
 
-    @ManyToOne
-    @JoinColumn(name = "oeuvre_id")
+    @ManyToOne // Si Exemplaire est lié à Oeuvre, par exemple
+    @JoinColumn(name = "oeuvre_id", nullable = false)
     private Oeuvre oeuvre;
 
 
