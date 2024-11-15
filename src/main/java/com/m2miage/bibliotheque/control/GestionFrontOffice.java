@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GestionFrontOffice {
@@ -21,24 +22,33 @@ public class GestionFrontOffice {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
-    public String creerReservation(Long oeuvreId, Long usagerId) {
-        Oeuvre oeuvre = oeuvreRepository.findById(oeuvreId)
-                .orElseThrow(() -> new RuntimeException("Oeuvre not found"));
+ /*   public String creerReservation(Long usagerId, Long oeuvreId) {
         Usager usager = usagerRepository.findById(usagerId)
-                .orElseThrow(() -> new RuntimeException("Usager not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        Oeuvre oeuvre = oeuvreRepository.findById(oeuvreId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid oeuvre ID"));
 
-        if (reservationRepository.existsByOeuvreIdAndUsagerId(oeuvreId, usagerId)) {
-            return "Usager already has a reservation for this oeuvre.";
+        // Check if a reservation already exists for this oeuvre and usager
+        Optional<Reservation> existingReservation = reservationRepository
+                .findByUsagerAndOeuvre(usager, oeuvre);
+        if (existingReservation.isPresent()) {
+            return "Reservation already exists for this usager and oeuvre";
         }
 
-        Reservation reservation = new Reservation(oeuvre, usager, LocalDate.now());
+        // Create new reservation
+        Reservation reservation = new Reservation();
+        reservation.setUsager(usager);
+        reservation.setOeuvre(oeuvre);
+        reservation.setDate(LocalDate.now());
+
         reservationRepository.save(reservation);
-        return "Reservation created successfully.";
+
+        return "Reservation réalisée avec succès";
     }
 
     public List<Reservation> obtenirTousReservations() {
         return reservationRepository.findAll();
-    }
+    }*/
 
 /*    public String creerOeuvre(String titre, String dateparution){
         if(oeuvreRepository.existsByTitreAndDateParution(titre, dateparution)){

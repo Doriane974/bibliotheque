@@ -54,7 +54,7 @@ public class IhmFrontOffice {
     }
 */
 
-    @GetMapping("/creer-reservation")
+/*    @GetMapping("/creer-reservation")
     public String afficherFormulaireCreerReservation() {
         return "creerReservation";
     }
@@ -69,7 +69,7 @@ public class IhmFrontOffice {
         List<Reservation> reservations = gestionFrontOffice.obtenirTousReservations();
         model.addAttribute("reservations", reservations);
         return "listeReservations";
-    }
+    }*/
     /*// Delete a reservation
     @PostMapping("/supprimerReservation")
     public String supprimerReservation(@RequestParam Long reservationId) {

@@ -5,10 +5,14 @@ import com.m2miage.bibliotheque.entity.Usager;
 import com.m2miage.bibliotheque.entity.Livre;
 import com.m2miage.bibliotheque.entity.Magazine;
 import com.m2miage.bibliotheque.entity.Exemplaire;
+import com.m2miage.bibliotheque.entity.Reservation;
 import com.m2miage.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GestionBackOffice {
@@ -22,6 +26,8 @@ public class GestionBackOffice {
     private LivreRepository livreRepository;
     @Autowired
     private ExemplaireRepository exemplaireRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     public String creerUsager(String nom, String prenom) {
         if (usagerRepository.existsByNomAndPrenom(nom, prenom)) {
@@ -120,6 +126,36 @@ public class GestionBackOffice {
         if (!prenom.isBlank()) usager.setPrenom(prenom);
         usagerRepository.save(usager);
     }
+
+    public String creerReservation(Long usagerId, Long oeuvreId) {
+        Usager usager = usagerRepository.findById(usagerId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        Oeuvre oeuvre = oeuvreRepository.findById(oeuvreId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid oeuvre ID"));
+
+        // Check if a reservation already exists for this oeuvre and usager
+        Optional<Reservation> existingReservation = reservationRepository
+                .findByUsagerAndOeuvre(usager, oeuvre);
+        if (existingReservation.isPresent()) {
+            return "Reservation already exists for this usager and oeuvre";
+        }
+
+        // Create new reservation
+        Reservation reservation = new Reservation();
+        reservation.setUsager(usager);
+        reservation.setOeuvre(oeuvre);
+        reservation.setDate(LocalDate.now());
+
+        reservationRepository.save(reservation);
+
+        return "Reservation réalisée avec succès";
+    }
+
+    public List<Reservation> obtenirTousReservations() {
+        return reservationRepository.findAll();
+    }
+
+
 
 
 

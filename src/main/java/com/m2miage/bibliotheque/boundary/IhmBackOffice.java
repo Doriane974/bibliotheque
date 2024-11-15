@@ -1,6 +1,6 @@
 package com.m2miage.bibliotheque.boundary;
 
-import com.m2miage.bibliotheque.control.GestionBackOffice;
+import com.m2miage.bibliotheque.control.*;
 import com.m2miage.bibliotheque.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import java.util.List;
 public class IhmBackOffice {
     @Autowired
     private GestionBackOffice gestionBackOffice;
+    //private GestionFrontOffice gestionFrontOffice;
 
     //Creation entités
 
@@ -202,6 +203,49 @@ public class IhmBackOffice {
     }
 
 
+    @GetMapping("/creerReservationChoisirUsager")
+    public String creerReservationChoisirUsager(Model model) {
+        // Fetch all users to be displayed on the initial page
+        List<Usager> usagers = gestionBackOffice.ObtenirTousUsagers();
+        model.addAttribute("usagers", usagers);
+        return "creerReservationChoisirUsager";
+    }
 
+    @PostMapping("/creerReservationChoisirUsager")
+    public String creerReservationUsagerChoisi(@RequestParam Long usagerId, Model model) {
+        // Store the selected user ID and pass it to the next page for selecting the "oeuvre"
+        model.addAttribute("selectedUsagerId", usagerId);
+        List<Magazine> magazines = gestionBackOffice.ObtenirTousMagazines();
+        List<Livre> livres = gestionBackOffice.ObtenirTousLivres();
+
+        // Handle null values if the repositories return null
+        if (magazines == null) magazines = new ArrayList<>();
+        if (livres == null) livres = new ArrayList<>();
+
+        model.addAttribute("magazines", magazines);
+        model.addAttribute("livres", livres);
+
+        return "creerReservationChoisirOeuvre";
+    }
+
+    @PostMapping("/creerReservationChoisirOeuvre")
+    public String creerReservationOeuvreChoisie(
+            @RequestParam("usagerId") Long usagerId,
+            @RequestParam("oeuvreId") Long oeuvreId,
+            Model model) {
+
+        // Create the reservation and provide feedback
+        String message = gestionBackOffice.creerReservation(usagerId, oeuvreId);
+        model.addAttribute("message", message);
+
+        return "resultatCreation";
+    }
+
+    @GetMapping("/liste-reservations")
+    public String afficherListeReservations(Model model) {
+        List<Reservation> reservations = gestionBackOffice.obtenirTousReservations();
+        model.addAttribute("reservations", reservations);
+        return "listeReservations";
+    }
 
 }

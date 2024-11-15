@@ -1,70 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Menu de la Bibliothèque</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      margin: 50px;
-      background-image: url('C:\Users\33766\M2IDMC\bibliotheque\src\main\resources\static\libraryDarkAcademia-transformed.jpeg'); /* Chemin de l'image */
-      background-size: cover; /* Pour couvrir toute la page */
-      background-position: center; /* Centrer l'image */
-      background-repeat: no-repeat; /* Ne pas répéter l'image */
-      position: relative; /* Pour positionner le contenu sur l'image de fond */
-    }
-    /* Ajouter une superposition transparente */
-    /*body::before {*/
-    /*  content: '';*/
-    /*  position: absolute;*/
-    /*  top: 0;*/
-    /*  left: 0;*/
-    /*  right: 0;*/
-    /*  bottom: 0;*/
-    /*  background-color: rgba(255, 255, 255, 0.1); !* Couleur blanche avec transparence *!*/
-    /*  z-index: 1; !* Placer sous le contenu *!*/
-    /*}*/
-    h1 {
-      color: #795431; /* Couleur du titre */
-      margin-bottom: 30px;
-      position: relative; /* Pour que le titre soit au-dessus de la superposition */
-      z-index: 2; /* Placer au-dessus de la superposition */
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 16px;
-      margin: 10px;
-      cursor: pointer;
-      background-color: #e6caec; /* Couleur de fond des boutons */
-      color: #795431; /* Couleur du texte des boutons */
-      border: none;
-      border-radius: 5px; /* Coins arrondis */
-      transition: background-color 0.3s; /* Effet de transition */
-      position: relative; /* Pour que les boutons soient au-dessus de la superposition */
-      z-index: 2; /* Placer au-dessus de la superposition */
-    }
-    button:hover {
-      background-color: #e89ef7; /* Couleur au survol */
-    }
-    /* Ajout d'une bordure et d'un ombre pour les boutons */
-    button:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-  </style>
-</head>
-<body>
-<h1>Menu</h1>
-<button onclick="window.location.href='/creer-usager'">Créer Usager</button>
-<button onclick="window.location.href='/creer-oeuvre'">Créer Oeuvre</button>
-</body>
-</html>
--->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +43,8 @@
 <button onclick="window.location.href='/creer-magazine'">Créer Magazine</button>
 <button onclick="window.location.href='/liste-usagers'">Afficher Usagers</button>
 <button onclick="window.location.href='/liste-oeuvres'">Afficher Oeuvres</button>
-<button onclick="window.location.href='/creer-reservation'">Afficher Oeuvres</button>
+<button onclick="window.location.href='/creerReservationChoisirUsager'">Créer une réservation</button>
+<button onclick="window.location.href='/liste-reservations'">Afficher les réservations</button>
 
 </body>
 </html>

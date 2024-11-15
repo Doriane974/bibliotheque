@@ -5,15 +5,19 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "reservation", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"oeuvre_id", "usager_id"})
+})
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "oeuvre_id", nullable = false)
     private Oeuvre oeuvre;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usager_id", nullable = false)
     private Usager usager;
 
