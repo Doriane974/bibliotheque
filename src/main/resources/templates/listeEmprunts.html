@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Liste des Reservations</title>
+  <title>Liste des Emprunts</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -60,7 +60,7 @@
   </style>
 </head>
 <body>
-<h1>Liste des Réservations Enregistrées</h1>
+<h1>Liste des Emprunts Enregistrés</h1>
 <table>
   <thead>
   <tr>
@@ -68,16 +68,20 @@
     <th>Oeuvre</th>
     <th>Nom</th>
     <th>Prenom</th>
-    <th>Fait le</th>
+    <th>Emprunté le</th>
+    <th>A rendre avant le</th>
+    <th>etat</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="reservation : ${reservations}">
-    <td th:text="${reservation.id}"></td>
-    <td th:text="${reservation.oeuvre.titre}"></td>
-    <td th:text="${reservation.usager.nom}"></td>
-    <td th:text="${reservation.usager.prenom}"></td>
-    <td th:text="${reservation.date}"></td>
+  <tr th:each="emprunt : ${emprunts}">
+    <td th:text="${emprunt.id}"></td>
+    <td th:text="${emprunt.exemplaire.oeuvre.titre}"></td>
+    <td th:text="${emprunt.usager.nom}"></td>
+    <td th:text="${emprunt.usager.prenom}"></td>
+    <td th:text="${emprunt.jourDebut}"></td>
+    <td th:text="${emprunt.jourFin}"></td>
+    <td th:text="${emprunt.exemplaire.etat}"></td>
 
   </tr>
   </tbody>

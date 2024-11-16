@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Liste des Reservations</title>
+  <title>Créer Emprunt - Choisir Usager</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -60,28 +60,34 @@
   </style>
 </head>
 <body>
-<h1>Liste des Réservations Enregistrées</h1>
+<h1>Créer un nouvel emprunt</h1>
+
+<h2>Choisir un usager</h2>
 <table>
   <thead>
   <tr>
     <th>ID</th>
-    <th>Oeuvre</th>
     <th>Nom</th>
-    <th>Prenom</th>
-    <th>Fait le</th>
+    <th>Prénom</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="reservation : ${reservations}">
-    <td th:text="${reservation.id}"></td>
-    <td th:text="${reservation.oeuvre.titre}"></td>
-    <td th:text="${reservation.usager.nom}"></td>
-    <td th:text="${reservation.usager.prenom}"></td>
-    <td th:text="${reservation.date}"></td>
-
+  <tr th:each="usager : ${usagers}">
+    <td th:text="${usager.id}"></td>
+    <td th:text="${usager.nom}"></td>
+    <td th:text="${usager.prenom}"></td>
+    <td>
+      <!-- Corrected form action to use the POST method -->
+      <form th:action="@{/creerEmpruntChoisirUsager}" method="post">
+        <input type="hidden" name="usagerId" th:value="${usager.id}">
+        <button type="submit">Choisir</button>
+      </form>
+    </td>
   </tr>
   </tbody>
 </table>
+
 <button onclick="window.location.href='/'">Retour menu</button>
 </body>
 </html>

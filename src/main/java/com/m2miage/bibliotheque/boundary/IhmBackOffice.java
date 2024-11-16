@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class IhmBackOffice {
@@ -203,6 +202,10 @@ public class IhmBackOffice {
     }
 
 
+//////////////////////////////////////////////////////////////////////
+//                           Reservations                           //
+//////////////////////////////////////////////////////////////////////
+
     @GetMapping("/creerReservationChoisirUsager")
     public String creerReservationChoisirUsager(Model model) {
         // Fetch all users to be displayed on the initial page
@@ -248,4 +251,91 @@ public class IhmBackOffice {
         return "listeReservations";
     }
 
+//////////////////////////////////////////////////////////////////////
+//                             Emprunts                             //
+//////////////////////////////////////////////////////////////////////
+
+
+
+    @GetMapping("/creerEmpruntChoisirUsager")
+    public String afficherListeUsagersPourEmprunt(Model model) {
+        List<Usager> usagers = gestionBackOffice.ObtenirTousUsagers();
+        model.addAttribute("usagers", usagers);
+        return "creerEmpruntChoisirUsager";  // This should match the name of your HTML file
+    }
+
+
+    @PostMapping("/creerEmpruntChoisirUsager")
+    public String creerEmprunUsagerChoisi(@RequestParam("usagerId") Long usagerId, Model model) {
+        // Store the selected user ID in the model for later use
+        model.addAttribute("selectedUsagerId", usagerId);
+
+        // Fetch all available oeuvres
+        List<Oeuvre> oeuvres = gestionBackOffice.obtenirToutesOeuvres();
+
+        // Create a map to store availability for each oeuvre
+        Map<Long, Boolean> disponibilites = new HashMap<>();
+
+        // Determine availability for each oeuvre by checking the related exemplaires
+        for (Oeuvre oeuvre : oeuvres) {
+            List<Exemplaire> exemplaires = gestionBackOffice.obtenirExemplaires(oeuvre.getId());
+
+            // Check if there's at least one exemplaire available ("en rayon")
+            boolean isDisponible = exemplaires.stream()
+                    .anyMatch(exemplaire -> exemplaire.getDisponibilite().equalsIgnoreCase("disponible"));
+
+            disponibilites.put(oeuvre.getId(), isDisponible);
+        }
+
+        // Add oeuvres and their availability to the model
+        model.addAttribute("oeuvres", oeuvres);
+        model.addAttribute("disponibilites", disponibilites); // Map of oeuvreId -> availability
+        return "creerEmpruntChoisirOeuvre";  // Forward to the next page to select an oeuvre
+    }
+
+
+    @PostMapping("/creerEmpruntChoisirOeuvre")
+    public String creerEmpruntOeuvreChoisie(
+            @RequestParam("usagerId") Long usagerId,
+            @RequestParam("oeuvreId") Long oeuvreId,
+            Model model) {
+
+        Usager usager = gestionBackOffice.obtenirUsager(usagerId);
+        Oeuvre oeuvre = gestionBackOffice.obtenirOeuvre(oeuvreId);
+
+        // Find the first available exemplaire
+        List<Exemplaire> exemplaires = gestionBackOffice.obtenirExemplaires(oeuvre.getId());
+        Exemplaire exemplaire = exemplaires.stream()
+                .filter(e -> e.getDisponibilite().equals("disponible"))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No available exemplaire for selected oeuvre"));
+
+        // Create the emprunt
+        gestionBackOffice.creerEmprunt(usager, exemplaire);
+
+        // Remove the reservation if it exists for this usager and oeuvre
+        Optional<Reservation> reservation = gestionBackOffice.obtenirReservationParUsagerEtOeuvre(usager, oeuvre);
+        reservation.ifPresent(gestionBackOffice::supprimerReservation);
+
+        model.addAttribute("message", "Emprunt créé avec succès!");
+        return "resultatCreation";  // Display the result
+    }
+
+
+    @GetMapping("/liste-emprunts")
+    public String afficherListeEmprunts(Model model) {
+        List<Emprunt> emprunts = gestionBackOffice.obtenirTousEmprunts();
+        model.addAttribute("emprunts", emprunts);
+        return "listeEmprunts";
+    }
 }
+
+
+/* TODO :
+* Partager les fichiers back/front, usager, oeuvre, emprunt, reservations
+* Gerer le rendu des oauvres
+* gerer archivage/non archivage des emprunts
+* faire du reverse, regarder les differences, update visual paradigm en conséquence
+* regarder les endroits ou il manque de la mise en forme (ajouter un exemplaire par exemple)
+
+ */

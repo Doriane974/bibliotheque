@@ -1,11 +1,6 @@
 package com.m2miage.bibliotheque.control;
 
-import com.m2miage.bibliotheque.entity.Oeuvre;
-import com.m2miage.bibliotheque.entity.Usager;
-import com.m2miage.bibliotheque.entity.Livre;
-import com.m2miage.bibliotheque.entity.Magazine;
-import com.m2miage.bibliotheque.entity.Exemplaire;
-import com.m2miage.bibliotheque.entity.Reservation;
+import com.m2miage.bibliotheque.entity.*;
 import com.m2miage.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +23,8 @@ public class GestionBackOffice {
     private ExemplaireRepository exemplaireRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private EmpruntRepository empruntRepository;
 
     public String creerUsager(String nom, String prenom) {
         if (usagerRepository.existsByNomAndPrenom(nom, prenom)) {
@@ -127,6 +124,11 @@ public class GestionBackOffice {
         usagerRepository.save(usager);
     }
 
+    public Oeuvre obtenirOeuvre(Long oeuvreId) {
+        return oeuvreRepository.findById(oeuvreId)
+                .orElseThrow(() -> new RuntimeException("Oeuvre not found"));
+    }
+
     public String creerReservation(Long usagerId, Long oeuvreId) {
         Usager usager = usagerRepository.findById(usagerId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
@@ -156,7 +158,31 @@ public class GestionBackOffice {
     }
 
 
+    public List<Oeuvre> obtenirToutesOeuvres() {
+        return oeuvreRepository.findAll();
+    }
 
+    public void creerEmprunt(Usager usager, Exemplaire exemplaire) {
+        // Set the availability of the exemplaire to "indisponible"
+        exemplaire.setDisponibilite("indisponible");
+
+        // Create a new Emprunt object
+        Emprunt emprunt = new Emprunt(usager, exemplaire, LocalDate.now());
+        empruntRepository.save(emprunt);
+    }
+
+    public Optional<Reservation> obtenirReservationParUsagerEtOeuvre(Usager usager, Oeuvre oeuvre) {
+        return reservationRepository.findByUsagerAndOeuvre(usager, oeuvre);
+    }
+
+    public void supprimerReservation(Reservation reservation) {
+        reservationRepository.delete(reservation);
+    }
+
+
+    public List<Emprunt> obtenirTousEmprunts(){
+        return empruntRepository.findAll();
+    }
 
 
 }

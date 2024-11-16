@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Liste des Reservations</title>
+  <title>Choisir une Oeuvre pour Emprunt</title>
   <style>
+
     body {
       font-family: 'Arial', sans-serif;
       text-align: center;
@@ -60,28 +61,35 @@
   </style>
 </head>
 <body>
-<h1>Liste des Réservations Enregistrées</h1>
+<h1>Liste des Oeuvres pour Emprunt</h1>
+
 <table>
   <thead>
   <tr>
     <th>ID</th>
-    <th>Oeuvre</th>
-    <th>Nom</th>
-    <th>Prenom</th>
-    <th>Fait le</th>
+    <th>Titre</th>
+    <th>Date de parution</th>
+    <th>Disponible</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="reservation : ${reservations}">
-    <td th:text="${reservation.id}"></td>
-    <td th:text="${reservation.oeuvre.titre}"></td>
-    <td th:text="${reservation.usager.nom}"></td>
-    <td th:text="${reservation.usager.prenom}"></td>
-    <td th:text="${reservation.date}"></td>
-
+  <tr th:each="oeuvre : ${oeuvres}">
+    <td th:text="${oeuvre.id}"></td>
+    <td th:text="${oeuvre.titre}"></td>
+    <td th:text="${oeuvre.dateParution}"></td>
+    <td th:text="${disponibilites[oeuvre.id] ? 'Oui' : 'Non'}"></td>
+    <td>
+      <form th:action="@{/creerEmpruntChoisirOeuvre}" method="post">
+        <input type="hidden" name="oeuvreId" th:value="${oeuvre.id}">
+        <input type="hidden" name="usagerId" th:value="${selectedUsagerId}">
+        <button type="submit" th:if="${disponibilites[oeuvre.id]}">Choisir cette oeuvre</button>
+      </form>
+    </td>
   </tr>
   </tbody>
 </table>
-<button onclick="window.location.href='/'">Retour menu</button>
+
+<button onclick="window.location.href='/'">Retour au menu</button>
 </body>
 </html>

@@ -11,3 +11,4 @@ public interface ExemplaireRepository extends JpaRepository<Exemplaire, Long> {
     List<Exemplaire> findByOeuvreId(Long oeuvreId);
 }
 
+

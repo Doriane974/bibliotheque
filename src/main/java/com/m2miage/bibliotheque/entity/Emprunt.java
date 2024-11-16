@@ -13,7 +13,7 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usager_id", nullable = false)
     private Usager usager;
 
