@@ -184,5 +184,13 @@ public class GestionBackOffice {
         return empruntRepository.findAll();
     }
 
+    public Emprunt obtenirEmprunt(Long empruntId){
+        return empruntRepository.findById(empruntId)
+                .orElseThrow(() -> new RuntimeException("Emprunt not found"));
+    }
+
+    public void supprimerEmprunt(Long empruntId){
+        empruntRepository.deleteById(empruntId);
+    }
 
 }

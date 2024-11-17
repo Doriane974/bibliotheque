@@ -328,14 +328,32 @@ public class IhmBackOffice {
         model.addAttribute("emprunts", emprunts);
         return "listeEmprunts";
     }
+
+    // Show form to modify a usager
+    @GetMapping("/rendreExemplaire")
+    public String afficherRendreExemplaireForm(@RequestParam Long empruntId, Model model) {
+        Emprunt emprunt = gestionBackOffice.obtenirEmprunt(empruntId);
+        model.addAttribute("emprunt", emprunt);
+        return "rendreExemplaire";
+    }
+
+
+    @PostMapping("/rendreExemplaire")
+    public String rendreExemplaireInfo(@RequestParam Long empruntId, @RequestParam String etat) {
+        Emprunt emprunt = gestionBackOffice.obtenirEmprunt(empruntId);
+        gestionBackOffice.modifierExemplaire(emprunt.getExemplaire().getId(), etat, "disponible");
+        gestionBackOffice.supprimerEmprunt(empruntId);
+        return "redirect:/liste-emprunts";
+    }
+
 }
 
 
 /* TODO :
 * Partager les fichiers back/front, usager, oeuvre, emprunt, reservations
-* Gerer le rendu des oauvres
+* Gerer le rendu des oeuvres
 * gerer archivage/non archivage des emprunts
 * faire du reverse, regarder les differences, update visual paradigm en conséquence
 * regarder les endroits ou il manque de la mise en forme (ajouter un exemplaire par exemple)
-
+* ajouter un menu gerer le back/front au debut
  */

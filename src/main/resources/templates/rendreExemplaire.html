@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendre Exemplaire</title>
+</head>
+<body>
+<h1>Modifier Exemplaire</h1>
+<form action="/modifierExemplaire" method="post">
+    <input type="hidden" name="exemplaireId" th:value="${emprunt.exemplaire.id}">
+    <input type="hidden" name="oeuvreId" th:value="${emprunt.exemplaire.oeuvre.id}">
+    <label for="etat">État:</label>
+    <select id="etat" name="etat" th:value="${emprunt.exemplaire.etat}">
+        <option value="très bon état" th:selected="${emprunt.exemplaire.etat == 'très bon état'}">Très bon état</option>
+        <option value="bon état" th:selected="${emprunt.exemplaire.etat == 'bon état'}">Bon état</option>
+        <option value="abimé" th:selected="${emprunt.exemplaire.etat == 'abimé'}">Abimé</option>
+    </select><br>
+    <button type="submit">Enregistrer</button>
+</form>
+<button onclick="window.location.href='/afficherExemplaires?oeuvreId=' + [[${exemplaire.oeuvre.id}]]">Annuler</button>
+</body>
+</html>

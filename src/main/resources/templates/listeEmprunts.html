@@ -70,7 +70,8 @@
     <th>Prenom</th>
     <th>Emprunté le</th>
     <th>A rendre avant le</th>
-    <th>etat</th>
+    <th>état</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
@@ -82,6 +83,19 @@
     <td th:text="${emprunt.jourDebut}"></td>
     <td th:text="${emprunt.jourFin}"></td>
     <td th:text="${emprunt.exemplaire.etat}"></td>
+    <td>
+      <form th:action="@{/rendreExemplaire}" method="post">
+        <input type="hidden" name="empruntId" th:value="${emprunt.id}">
+        <select name="etat">
+          <option value="très bon état">Très bon état</option>
+          <option value="bon état">Bon état</option>
+          <option value="abimé">Abimé</option>
+        </select>
+        <button type="submit">Supprimer</button>
+      </form>
+    </td>
+
+
 
   </tr>
   </tbody>
