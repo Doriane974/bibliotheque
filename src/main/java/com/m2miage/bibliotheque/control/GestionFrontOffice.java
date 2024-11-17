@@ -16,12 +16,6 @@ public class GestionFrontOffice {
     private UsagerRepository usagerRepository;
     @Autowired
     private OeuvreRepository oeuvreRepository;
-//    @Autowired
-//    private MagazineRepository magazineRepository;
-//    @Autowired
-//    private LivreRepository livreRepository;
-//    @Autowired
-//    private ExemplaireRepository exemplaireRepository;
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
@@ -54,9 +48,6 @@ public class GestionFrontOffice {
 
         return "Reservation réalisée avec succès";
     }
-
-
-
     public List<Reservation> obtenirTousReservations() {
         return reservationRepository.findAll();
     }
@@ -69,12 +60,10 @@ public class GestionFrontOffice {
     public void supprimerReservation(Reservation reservation) {
         reservationRepository.delete(reservation);
     }
-
     public void supprimerReservation(Long reservationId){
         Reservation reservationToDelete = obtenirReservation(reservationId);
         supprimerReservation(reservationToDelete);
     }
-
 
     ////////////////////////////////////////
     //        Gestion des Emprunts        //

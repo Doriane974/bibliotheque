@@ -8,68 +8,73 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
             margin: 50px;
-            background-color: #fef4f3; /* Couleur de fond légère */
+            background-color: #fef4f3;
         }
         h1 {
-            color: #795431; /* Couleur du titre */
+            color: #795431;
             margin-bottom: 30px;
         }
-        form {
-            background-color: #ffffff; /* Couleur de fond blanche pour le formulaire */
-            padding: 20px; /* Espacement intérieur */
-            border-radius: 10px; /* Coins arrondis */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
-            display: inline-block; /* Pour centrer le formulaire */
+        table {
+            margin: 0 auto;
+            width: 80%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
-        input[type="text"] {
-            padding: 10px;
+        th, td {
+            padding: 15px;
+            text-align: left;
             font-size: 16px;
-            margin: 10px 0; /* Espacement vertical */
-            border: 1px solid #ccc; /* Bordure grise */
-            border-radius: 5px; /* Coins arrondis */
-            width: 200px; /* Largeur des champs */
-            transition: border-color 0.3s; /* Effet de transition */
+            color: #795431;
         }
-        input[type="text"]:focus {
-            border-color: #e89ef7; /* Couleur de la bordure au focus */
-            outline: none; /* Supprimer l'outline par défaut */
+        th {
+            background-color: #e6caec;
+            font-weight: bold;
         }
-        input[type="submit"] {
-            padding: 15px 30px;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: #e6caec; /* Couleur de fond des boutons */
-            color: #795431; /* Couleur du texte des boutons */
-            border: none;
-            border-radius: 5px; /* Coins arrondis */
-            transition: background-color 0.3s; /* Effet de transition */
+        td {
+            border-bottom: 1px solid #e89ef7;
         }
-        input[type="submit"]:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
-        input[type="submit"]:hover {
-            background-color: #e89ef7; /* Couleur au survol */
+        tr:hover {
+            background-color: #f9e5fa;
         }
         button {
             padding: 15px 30px;
             font-size: 16px;
-            margin: 10px;
+            margin: 20px;
             cursor: pointer;
-            background-color: #e6caec; /* Couleur de fond des boutons */
-            color: #795431; /* Couleur du texte des boutons */
+            background-color: #e6caec;
+            color: #795431;
             border: none;
-            border-radius: 5px; /* Coins arrondis */
-            transition: background-color 0.3s; /* Effet de transition */
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #e89ef7; /* Couleur au survol */
+            background-color: #e89ef7;
         }
-        /* Ajout d'une bordure et d'un ombre pour les boutons */
         button:focus {
             outline: none;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        select {
+            padding: 15px;
+            font-size: 16px;
+            margin: 10px 0;
+            background-color: #ffffff;
+            color: #795431;
+            border: 2px solid #e6caec;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        select:focus {
+            outline: none;
+            border-color: #e89ef7;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        option {
+            color: #795431;
         }
     </style>
 </head>
