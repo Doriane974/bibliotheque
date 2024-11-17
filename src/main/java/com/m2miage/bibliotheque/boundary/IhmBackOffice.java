@@ -13,7 +13,8 @@ import java.util.*;
 public class IhmBackOffice {
     @Autowired
     private GestionBackOffice gestionBackOffice;
-    //private GestionFrontOffice gestionFrontOffice;
+    @Autowired
+    private GestionFrontOffice gestionFrontOffice;
 
     //Creation entités
 
@@ -238,7 +239,7 @@ public class IhmBackOffice {
             Model model) {
 
         // Create the reservation and provide feedback
-        String message = gestionBackOffice.creerReservation(usagerId, oeuvreId);
+        String message = gestionFrontOffice.creerReservation(usagerId, oeuvreId);
         model.addAttribute("message", message);
 
         return "resultatCreation";
@@ -246,9 +247,16 @@ public class IhmBackOffice {
 
     @GetMapping("/liste-reservations")
     public String afficherListeReservations(Model model) {
-        List<Reservation> reservations = gestionBackOffice.obtenirTousReservations();
+        List<Reservation> reservations = gestionFrontOffice.obtenirTousReservations();
         model.addAttribute("reservations", reservations);
         return "listeReservations";
+    }
+
+    // Delete an exemplaire
+    @PostMapping("/annulerReservation")
+    public String annulerReservation(@RequestParam Long reservationId) {
+        gestionFrontOffice.supprimerReservation(reservationId);
+        return "redirect:/liste-reservations";
     }
 
 //////////////////////////////////////////////////////////////////////
@@ -311,11 +319,11 @@ public class IhmBackOffice {
                 .orElseThrow(() -> new IllegalStateException("No available exemplaire for selected oeuvre"));
 
         // Create the emprunt
-        gestionBackOffice.creerEmprunt(usager, exemplaire);
+        gestionFrontOffice.creerEmprunt(usager, exemplaire);
 
         // Remove the reservation if it exists for this usager and oeuvre
-        Optional<Reservation> reservation = gestionBackOffice.obtenirReservationParUsagerEtOeuvre(usager, oeuvre);
-        reservation.ifPresent(gestionBackOffice::supprimerReservation);
+        Optional<Reservation> reservation = gestionFrontOffice.obtenirReservationParUsagerEtOeuvre(usager, oeuvre);
+        reservation.ifPresent(gestionFrontOffice::supprimerReservation);
 
         model.addAttribute("message", "Emprunt créé avec succès!");
         return "resultatCreation";  // Display the result
@@ -324,7 +332,7 @@ public class IhmBackOffice {
 
     @GetMapping("/liste-emprunts")
     public String afficherListeEmprunts(Model model) {
-        List<Emprunt> emprunts = gestionBackOffice.obtenirTousEmprunts();
+        List<Emprunt> emprunts = gestionFrontOffice.obtenirTousEmprunts();
         model.addAttribute("emprunts", emprunts);
         return "listeEmprunts";
     }
@@ -332,7 +340,7 @@ public class IhmBackOffice {
     // Show form to modify a usager
     @GetMapping("/rendreExemplaire")
     public String afficherRendreExemplaireForm(@RequestParam Long empruntId, Model model) {
-        Emprunt emprunt = gestionBackOffice.obtenirEmprunt(empruntId);
+        Emprunt emprunt = gestionFrontOffice.obtenirEmprunt(empruntId);
         model.addAttribute("emprunt", emprunt);
         return "rendreExemplaire";
     }
@@ -340,9 +348,9 @@ public class IhmBackOffice {
 
     @PostMapping("/rendreExemplaire")
     public String rendreExemplaireInfo(@RequestParam Long empruntId, @RequestParam String etat) {
-        Emprunt emprunt = gestionBackOffice.obtenirEmprunt(empruntId);
+        Emprunt emprunt = gestionFrontOffice.obtenirEmprunt(empruntId);
         gestionBackOffice.modifierExemplaire(emprunt.getExemplaire().getId(), etat, "disponible");
-        gestionBackOffice.supprimerEmprunt(empruntId);
+        gestionFrontOffice.supprimerEmprunt(empruntId);
         return "redirect:/liste-emprunts";
     }
 
@@ -351,9 +359,10 @@ public class IhmBackOffice {
 
 /* TODO :
 * Partager les fichiers back/front, usager, oeuvre, emprunt, reservations
-* Gerer le rendu des oeuvres
+* Gerer le rendu des oeuvres : done
 * gerer archivage/non archivage des emprunts
 * faire du reverse, regarder les differences, update visual paradigm en conséquence
 * regarder les endroits ou il manque de la mise en forme (ajouter un exemplaire par exemple)
 * ajouter un menu gerer le back/front au debut
+* gere les dates de facon constante
  */

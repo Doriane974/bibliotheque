@@ -129,68 +129,13 @@ public class GestionBackOffice {
                 .orElseThrow(() -> new RuntimeException("Oeuvre not found"));
     }
 
-    public String creerReservation(Long usagerId, Long oeuvreId) {
-        Usager usager = usagerRepository.findById(usagerId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        Oeuvre oeuvre = oeuvreRepository.findById(oeuvreId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid oeuvre ID"));
-
-        // Check if a reservation already exists for this oeuvre and usager
-        Optional<Reservation> existingReservation = reservationRepository
-                .findByUsagerAndOeuvre(usager, oeuvre);
-        if (existingReservation.isPresent()) {
-            return "Reservation already exists for this usager and oeuvre";
-        }
-
-        // Create new reservation
-        Reservation reservation = new Reservation();
-        reservation.setUsager(usager);
-        reservation.setOeuvre(oeuvre);
-        reservation.setDate(LocalDate.now());
-
-        reservationRepository.save(reservation);
-
-        return "Reservation réalisée avec succès";
-    }
-
-    public List<Reservation> obtenirTousReservations() {
-        return reservationRepository.findAll();
-    }
-
 
     public List<Oeuvre> obtenirToutesOeuvres() {
         return oeuvreRepository.findAll();
     }
 
-    public void creerEmprunt(Usager usager, Exemplaire exemplaire) {
-        // Set the availability of the exemplaire to "indisponible"
-        exemplaire.setDisponibilite("indisponible");
-
-        // Create a new Emprunt object
-        Emprunt emprunt = new Emprunt(usager, exemplaire, LocalDate.now());
-        empruntRepository.save(emprunt);
-    }
-
-    public Optional<Reservation> obtenirReservationParUsagerEtOeuvre(Usager usager, Oeuvre oeuvre) {
-        return reservationRepository.findByUsagerAndOeuvre(usager, oeuvre);
-    }
-
-    public void supprimerReservation(Reservation reservation) {
-        reservationRepository.delete(reservation);
-    }
 
 
-    public List<Emprunt> obtenirTousEmprunts(){
-        return empruntRepository.findAll();
-    }
 
-    public Emprunt obtenirEmprunt(Long empruntId){
-        return empruntRepository.findById(empruntId)
-                .orElseThrow(() -> new RuntimeException("Emprunt not found"));
-    }
-
-    public void supprimerEmprunt(Long empruntId){
-        empruntRepository.deleteById(empruntId);
-    }
 
 }

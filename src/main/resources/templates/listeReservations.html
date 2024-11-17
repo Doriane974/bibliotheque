@@ -69,6 +69,7 @@
     <th>Nom</th>
     <th>Prenom</th>
     <th>Fait le</th>
+    <th>Action</th>
   </tr>
   </thead>
   <tbody>
@@ -78,7 +79,12 @@
     <td th:text="${reservation.usager.nom}"></td>
     <td th:text="${reservation.usager.prenom}"></td>
     <td th:text="${reservation.date}"></td>
-
+    <td>
+      <form th:action="@{/annulerReservation}" method="post">
+        <input type="hidden" name="reservationId" th:value="${reservation.id}">
+        <button type="submit">Annuler</button>
+      </form>
+    </td>
   </tr>
   </tbody>
 </table>
