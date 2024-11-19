@@ -211,10 +211,8 @@ public class IhmBackOffice {
 
 /* TODO :
 * Partager les fichiers back/front, usager, oeuvre, emprunt, reservations
-* Gerer le rendu des oeuvres : done
 * gerer archivage/non archivage des emprunts
 * faire du reverse, regarder les differences, update visual paradigm en conséquence
 * regarder les endroits ou il manque de la mise en forme (ajouter un exemplaire par exemple)
-* ajouter un menu gerer le back/front au debut
 * gere les dates de facon constante
  */

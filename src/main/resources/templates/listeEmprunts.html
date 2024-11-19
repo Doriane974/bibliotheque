@@ -128,7 +128,7 @@
     <th>Emprunté le</th>
     <th>A rendre avant le</th>
     <th>état</th>
-    <th>Action</th>
+    <th>Rendre</th>
   </tr>
   </thead>
   <tbody>
@@ -143,12 +143,14 @@
     <td>
       <form th:action="@{/rendreExemplaire}" method="post">
         <input type="hidden" name="empruntId" th:value="${emprunt.id}">
-        <select name="etat">
-          <option value="très bon état">Très bon état</option>
-          <option value="bon état">Bon état</option>
-          <option value="abimé">Abimé</option>
+
+        <label for="etat">État:</label>
+        <select id = "etat" name="etat">
+          <option value="très bon état" th:selected="${emprunt.exemplaire.etat == 'très bon état'}">Très bon état</option>
+          <option value="bon état" th:selected="${emprunt.exemplaire.etat == 'bon état'}">Bon état</option>
+          <option value="abimé" th:selected="${emprunt.exemplaire.etat == 'abimé'}">Abimé</option>
         </select>
-        <button type="submit">Supprimer</button>
+        <button type="submit">Rendre l'exemplaire</button>
       </form>
     </td>
 
@@ -157,6 +159,6 @@
   </tr>
   </tbody>
 </table>
-<button onclick="window.location.href='/'">Retour menu</button>
+<button onclick="window.location.href='/index-front-office'">Retour menu</button>
 </body>
 </html>
