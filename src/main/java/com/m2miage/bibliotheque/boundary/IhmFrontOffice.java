@@ -154,8 +154,8 @@ public class IhmFrontOffice {
     @PostMapping("/rendreExemplaire")
     public String rendreExemplaireInfo(@RequestParam Long empruntId, @RequestParam String etat) {
         Emprunt emprunt = gestionFrontOffice.obtenirEmprunt(empruntId);
-        gestionBackOffice.modifierExemplaire(emprunt.getExemplaire().getId(), etat, "disponible");
         gestionFrontOffice.supprimerEmprunt(empruntId);
+        gestionBackOffice.modifierExemplaire(emprunt.getExemplaire().getId(), etat, "disponible");
         return "redirect:/liste-emprunts";
     }
 }

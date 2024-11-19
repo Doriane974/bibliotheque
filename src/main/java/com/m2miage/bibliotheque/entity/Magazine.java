@@ -20,11 +20,9 @@ public class Magazine extends Oeuvre {
         this.numero = numero;
     }
 
-    public void supprimer() {
-        // Implémentation de la méthode pour supprimer un magazine
-    }
+    //public void supprimer() {
+    //}
 
-    // Getters et Setters
     public String getRevue() {
         return revue;
     }

@@ -4,6 +4,8 @@ import com.m2miage.bibliotheque.entity.*;
 import com.m2miage.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
+
 
 import java.util.List;
 
@@ -43,7 +45,7 @@ public class GestionBackOffice {
                 .orElseThrow(() -> new RuntimeException("Usager not found"));
     }
     public List<Usager> ObtenirTousUsagers() {
-        return usagerRepository.findAll();
+        return usagerRepository.findAll(Sort.by(Sort.Direction.ASC, "nom", "prenom"));
     }
     public void modifierUsager(Long usagerId, String nom, String prenom) {
         Usager usager = obtenirUsager(usagerId);
@@ -91,7 +93,8 @@ public class GestionBackOffice {
         return "Livre créé avec succès.";
     }
     public List<Livre> ObtenirTousLivres() {
-        return livreRepository.findAll();
+        return livreRepository.findAll(Sort.by(Sort.Direction.ASC, "titre", "auteur"));
+
     }
 
     //-------------------------------------//
@@ -104,7 +107,8 @@ public class GestionBackOffice {
         return "Magazine créé avec succès.";
     }
     public List<Magazine> ObtenirTousMagazines() {
-        return magazineRepository.findAll();
+        return magazineRepository.findAll(Sort.by(Sort.Direction.ASC, "revue", "titre"));
+
     }
 
     //-------------------------------------//
@@ -138,12 +142,18 @@ public class GestionBackOffice {
         exemplaireRepository.deleteById(exemplaireId);
         return "Suppression effectuée.";
     }
-
     public void modifierExemplaire(Long exemplaireId, String etat, String disponibilite) {
         Exemplaire exemplaire = obtenirExemplaire(exemplaireId);
-        exemplaire.setEtat(etat);
-        exemplaire.setDisponibilite(disponibilite);
-        exemplaireRepository.save(exemplaire);
+        if(etat == "abimé"){
+            exemplaireRepository.deleteById(exemplaireId);
+        }
+        else{
+            exemplaire.setEtat(etat);
+            exemplaire.setDisponibilite(disponibilite);
+            exemplaireRepository.save(exemplaire);
+        }
+
+
     }
 
 

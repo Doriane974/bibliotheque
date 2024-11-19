@@ -117,7 +117,9 @@
   </style>
 </head>
 <body>
-<h1>Modifier Exemplaire</h1>
+<h1>Modifier exemplaire</h1>
+<h4>Attention : si un exemplaire est abimé, il sera retiré du stock</h4>
+
 <form action="/modifierExemplaire" method="post">
   <input type="hidden" name="exemplaireId" th:value="${exemplaire.id}">
   <input type="hidden" name="oeuvreId" th:value="${exemplaire.oeuvre.id}">

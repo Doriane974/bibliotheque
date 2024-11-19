@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>creerUsager</title>
+    <title>Créer un usager</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -119,8 +119,8 @@
 <body>
 <h1>Enregistrer un usager</h1>
 <form action="/creer-usager" method="post">
-    Nom: <input type="text" name="nom"><br>
-    Prénom: <input type="text" name="prenom"><br>
+    Nom: <input type="text" name="nom" required><br>
+    Prénom: <input type="text" name="prenom" required><br>
     <input type="submit" value="Créer Usager">
 </form>
 <button onclick="window.location.href='/index-back-office'">Retour menu</button>

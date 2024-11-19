@@ -3,6 +3,7 @@ package com.m2miage.bibliotheque.control;
 import com.m2miage.bibliotheque.entity.*;
 import com.m2miage.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -49,7 +50,8 @@ public class GestionFrontOffice {
         return "Reservation réalisée avec succès";
     }
     public List<Reservation> obtenirTousReservations() {
-        return reservationRepository.findAll();
+        return reservationRepository.findAll(Sort.by(Sort.Direction.ASC, "oeuvre", "usager"));
+
     }
     public Reservation obtenirReservation(Long reservationID){
         return reservationRepository.findById(reservationID).orElseThrow(() -> new RuntimeException("Emprunt not found"));
@@ -78,7 +80,8 @@ public class GestionFrontOffice {
         empruntRepository.save(emprunt);
     }
     public List<Emprunt> obtenirTousEmprunts(){
-        return empruntRepository.findAll();
+        return empruntRepository.findAll(Sort.by(Sort.Direction.ASC,  "usager"));
+
     }
     public Emprunt obtenirEmprunt(Long empruntId){
         return empruntRepository.findById(empruntId)
