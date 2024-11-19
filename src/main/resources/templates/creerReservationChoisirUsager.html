@@ -97,7 +97,6 @@
         <td th:text="${usager.nom}"></td>
         <td th:text="${usager.prenom}"></td>
         <td>
-            <!-- Corrected form action to use the POST method -->
             <form th:action="@{/creerReservationChoisirUsager}" method="post">
                 <input type="hidden" name="usagerId" th:value="${usager.id}">
                 <button type="submit">Choisir</button>

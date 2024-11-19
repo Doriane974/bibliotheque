@@ -1,4 +1,4 @@
-package com.m2miage.bibliotheque.control;
+    package com.m2miage.bibliotheque.control;
 
 import com.m2miage.bibliotheque.entity.*;
 import com.m2miage.bibliotheque.repository.*;
@@ -19,6 +19,11 @@ public class GestionBackOffice {
     private LivreRepository livreRepository;
     @Autowired
     private ExemplaireRepository exemplaireRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
+    @Autowired
+    private EmpruntRepository empruntRepository;
+
 
     /////////////////////////////////////////
     //         Gestion des Usagers         //
@@ -46,9 +51,23 @@ public class GestionBackOffice {
         if (!prenom.isBlank()) usager.setPrenom(prenom);
         usagerRepository.save(usager);
     }
-    public void supprimerUsager(Long usagerId) {
+    public String supprimerUsager(Long usagerId) {
+        Usager usager = obtenirUsager(usagerId);
+
+        boolean hasReservations = !reservationRepository.findByUsagerId(usagerId).isEmpty();
+        boolean hasEmprunts = !empruntRepository.findByUsagerId(usagerId).isEmpty();
+
+        if (hasReservations) {
+            return "Vous ne pouvez pas supprimer cet usager, car il a des réservations en cours.";
+        }
+        if (hasEmprunts) {
+            return "Vous ne pouvez pas supprimer cet usager, car il a des emprunts en cours.";
+        }
+
         usagerRepository.deleteById(usagerId);
+        return "Suppression effectuée.";
     }
+
 
     /////////////////////////////////////////
     //         Gestion des Oeuvres         //
@@ -111,9 +130,15 @@ public class GestionBackOffice {
         return exemplaireRepository.findById(exemplaireId)
                 .orElseThrow(() -> new RuntimeException("Exemplaire not found"));
     }
-    public void supprimerExemplaire(Long exemplaireId) {
+    public String supprimerExemplaire(Long exemplaireId) {
+        boolean hasEmprunts = !empruntRepository.findByExemplaireId(exemplaireId).isEmpty();
+        if (hasEmprunts) {
+            return "Vous ne pouvez pas supprimer cet exemplaire, car il est emprunté par un usager.";
+        }
         exemplaireRepository.deleteById(exemplaireId);
+        return "Suppression effectuée.";
     }
+
     public void modifierExemplaire(Long exemplaireId, String etat, String disponibilite) {
         Exemplaire exemplaire = obtenirExemplaire(exemplaireId);
         exemplaire.setEtat(etat);

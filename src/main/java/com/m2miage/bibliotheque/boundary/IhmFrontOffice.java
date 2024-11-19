@@ -18,6 +18,11 @@ public class IhmFrontOffice {
     private GestionBackOffice gestionBackOffice;
 
 
+    @GetMapping("/index-front-office")
+    public String afficherMenuFrontOffice() {
+        return "indexFrontOffice";
+    }
+
 //////////////////////////////////////////////////////////////////////
 //                           Reservations                           //
 //////////////////////////////////////////////////////////////////////

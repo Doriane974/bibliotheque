@@ -1,5 +1,6 @@
 package com.m2miage.bibliotheque.repository;
 
+import com.m2miage.bibliotheque.entity.Exemplaire;
 import com.m2miage.bibliotheque.entity.Reservation;
 import com.m2miage.bibliotheque.entity.Oeuvre;
 import com.m2miage.bibliotheque.entity.Usager;
@@ -14,4 +15,5 @@ import java.util.Optional;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findByOeuvreId(Long oeuvreId);
     Optional<Reservation> findByUsagerAndOeuvre(Usager usager, Oeuvre oeuvre);
+    List<Reservation> findByUsagerId(Long usagerId);
 }

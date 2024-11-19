@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rendre Exemplaire</title>
+    <title>Menu de la Bibliothèque</title>
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -76,60 +77,17 @@
         option {
             color: #795431;
         }
-        form {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus {
-            border-color: #e89ef7;
-            outline: none;
-        }
-        input[type="submit"] {
-            padding: 15px 30px;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: #e6caec;
-            color: #795431;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #e89ef7;
-        }
-        input[type="submit"]:focus {
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
     </style>
 </head>
 <body>
-<h1>Modifier Exemplaire</h1>
-<form action="/modifierExemplaire" method="post">
+<h1>Menu</h1>
+<button onclick="window.location.href='/creer-usager'">Créer Usager</button>
+<button onclick="window.location.href='/creer-livre'">Créer Livre</button>
+<button onclick="window.location.href='/creer-magazine'">Créer Magazine</button>
+<button onclick="window.location.href='/liste-usagers'">Afficher Usagers</button>
+<button onclick="window.location.href='/liste-oeuvres'">Afficher Oeuvres</button>
+<button onclick="window.location.href='/'">Retour menu</button>
 
-    <input type="hidden" name="exemplaireId" th:value="${emprunt.exemplaire.id}">
-    <input type="hidden" name="oeuvreId" th:value="${emprunt.exemplaire.oeuvre.id}">
-    <label for="etat">État:</label>
-    <select id="etat" name="etat" th:value="${emprunt.exemplaire.etat}">
-        <option value="très bon état" th:selected="${emprunt.exemplaire.etat == 'très bon état'}">Très bon état</option>
-        <option value="bon état" th:selected="${emprunt.exemplaire.etat == 'bon état'}">Bon état</option>
-        <option value="abimé" th:selected="${emprunt.exemplaire.etat == 'abimé'}">Abimé</option>
-    </select><br>
-    <button type="submit">Enregistrer</button>
-</form>
-<button onclick="window.location.href='/afficherExemplaires?oeuvreId=' + [[${exemplaire.oeuvre.id}]]">Annuler</button>
 </body>
 </html>
+

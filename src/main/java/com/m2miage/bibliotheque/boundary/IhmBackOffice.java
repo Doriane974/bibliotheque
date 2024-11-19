@@ -14,6 +14,11 @@ public class IhmBackOffice {
     @Autowired
     private GestionBackOffice gestionBackOffice;
 
+    @GetMapping("/index-back-office")
+    public String afficherMenuBackOffice() {
+        return "indexBackOffice";
+    }
+
     /////////////////////////////////////////
     //               Usagers               //
     /////////////////////////////////////////
@@ -37,11 +42,23 @@ public class IhmBackOffice {
         return "listeUsagers";
     }
 
-    @PostMapping("/supprimerUsager")
+/*    @PostMapping("/supprimerUsager")
     public String supprimerUsager(@RequestParam Long usagerId) {
         gestionBackOffice.supprimerUsager(usagerId);
         return "redirect:/liste-usagers";
+    }*/
+
+    @PostMapping("/supprimerUsager")
+    public String supprimerUsager(@RequestParam Long usagerId, Model model) {
+        String message = gestionBackOffice.supprimerUsager(usagerId);
+        model.addAttribute("message", message);
+
+        if ("Suppression effectuée.".equals(message)) {
+            return "redirect:/liste-usagers";
+        }
+        return "resultatCreation";
     }
+
 
     @GetMapping("/modifierUsager")
     public String afficherModifierUsagerForm(@RequestParam Long usagerId, Model model) {
@@ -67,7 +84,6 @@ public class IhmBackOffice {
         List<Magazine> magazines = gestionBackOffice.ObtenirTousMagazines();
         List<Livre> livres = gestionBackOffice.ObtenirTousLivres();
 
-        // Validate and handle potential null values
         if (magazines == null) magazines = new ArrayList<>();
         if (livres == null) livres = new ArrayList<>();
 
@@ -96,7 +112,7 @@ public class IhmBackOffice {
 
         String message = gestionBackOffice.creerLivre(titre, auteur, edition, dateParution);
         model.addAttribute("message", message);
-        return "resultatCreation"; // Page pour afficher le résultat
+        return "resultatCreation";
     }
 
     @GetMapping("/liste-livres")
@@ -126,7 +142,7 @@ public class IhmBackOffice {
 
         String message = gestionBackOffice.creerMagazine(titre, revue, numero, dateParution);
         model.addAttribute("message", message);
-        return "resultatCreation"; // Page pour afficher le résultat
+        return "resultatCreation";
     }
 
     @GetMapping("/liste-magazines")
@@ -143,10 +159,9 @@ public class IhmBackOffice {
     @GetMapping("/ajouterExemplaire")
     public String afficherFormulaireAjouterExemplaire(@RequestParam Long oeuvreId, Model model) {
         model.addAttribute("oeuvreId", oeuvreId);
-        return "ajouterExemplaire"; // This is the template for the form
+        return "ajouterExemplaire";
     }
 
-    // POST method to handle form submission
     @PostMapping("/ajouterExemplaire")
     public String ajouterExemplaire(@RequestParam Long oeuvreId,
                                     @RequestParam String etat,
@@ -154,21 +169,26 @@ public class IhmBackOffice {
                                     Model model) {
         String message = gestionBackOffice.ajouterExemplaire(oeuvreId, etat, disponibilite);
         model.addAttribute("message", message);
-        return "resultatCreation"; // Reuse the result template
+        return "resultatCreation";
     }
 
     @GetMapping("/afficherExemplaires")
     public String afficherExemplaires(@RequestParam Long oeuvreId, Model model) {
         List<Exemplaire> exemplaires = gestionBackOffice.obtenirTousExemplaires(oeuvreId);
         model.addAttribute("exemplaires", exemplaires);
-        return "listeExemplaires"; // The template to display exemplaires
+        return "listeExemplaires";
     }
 
     @PostMapping("/supprimerExemplaire")
-    public String supprimerExemplaire(@RequestParam Long exemplaireId, @RequestParam Long oeuvreId) {
-        gestionBackOffice.supprimerExemplaire(exemplaireId);
-        return "redirect:/afficherExemplaires?oeuvreId=" + oeuvreId;
+    public String supprimerExemplaire(@RequestParam Long exemplaireId, @RequestParam Long oeuvreId, Model model) {
+        String message = gestionBackOffice.supprimerExemplaire(exemplaireId);
+        model.addAttribute("message", message);
+        if ("Suppression effectuée.".equals(message)) {
+            return "redirect:/afficherExemplaires?oeuvreId=";
+        }
+        return "resultatCreation";
     }
+
 
     @GetMapping("/modifierExemplaire")
     public String afficherModifierExemplaireForm(@RequestParam Long exemplaireId, Model model) {

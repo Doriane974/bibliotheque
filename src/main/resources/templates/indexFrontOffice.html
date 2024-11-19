@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>creerOeuvre</title>
+    <title>Menu de la Bibliothèque</title>
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -79,12 +80,14 @@
     </style>
 </head>
 <body>
-<h1>Enregistrer une nouvelle oeuvre</h1>
-<form action="/creer-oeuvre" method="post">
-  Titre: <input type="text" name="titre"><br>
-  Date de Parution: <input type="text" name="dateParution"><br>
-  <input type="submit" value="Créer Oeuvre">
-</form>
+<h1>Menu</h1>
+<button onclick="window.location.href='/creerReservationChoisirUsager'">Créer une réservation</button>
+<button onclick="window.location.href='/liste-reservations'">Afficher les réservations</button>
+<button onclick="window.location.href='/creerEmpruntChoisirUsager'">Créer un emprunt</button>
+<button onclick="window.location.href='/liste-emprunts'">Afficher les emprunts</button>
 <button onclick="window.location.href='/'">Retour menu</button>
+
+
 </body>
 </html>
+
