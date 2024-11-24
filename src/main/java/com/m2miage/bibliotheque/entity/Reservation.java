@@ -53,14 +53,6 @@ public class Reservation {
         this.usager = usager;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
 
 
 

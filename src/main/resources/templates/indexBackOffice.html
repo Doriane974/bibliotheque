@@ -40,16 +40,22 @@
         tr:hover {
             background-color: #f9e5fa;
         }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         button {
             padding: 15px 30px;
             font-size: 16px;
-            margin: 20px;
+            margin: 5px;
             cursor: pointer;
             background-color: #e6caec;
             color: #795431;
             border: none;
             border-radius: 5px;
             transition: background-color 0.3s;
+            width: 250px;
         }
         button:hover {
             background-color: #e89ef7;
@@ -81,12 +87,14 @@
 </head>
 <body>
 <h1>Menu back office</h1>
-<button onclick="window.location.href='/creer-usager'">Créer un usager</button>
-<button onclick="window.location.href='/creer-livre'">Créer un livre</button>
-<button onclick="window.location.href='/creer-magazine'">Créer un magazine</button>
-<button onclick="window.location.href='/liste-usagers'">Afficher les usagers</button>
-<button onclick="window.location.href='/liste-oeuvres'">Afficher les oeuvres</button>
-<button onclick="window.location.href='/'">Retour menu</button>
+<div class="button-container">
+    <button onclick="window.location.href='/creer-usager'">Créer un usager</button>
+    <button onclick="window.location.href='/creer-livre'">Créer un livre</button>
+    <button onclick="window.location.href='/creer-magazine'">Créer un magazine</button>
+    <button onclick="window.location.href='/liste-usagers'">Afficher les usagers</button>
+    <button onclick="window.location.href='/liste-oeuvres'">Afficher les oeuvres</button>
+    <button onclick="window.location.href='/'">Retour menu</button>
+</div>
 
 </body>
 </html>

@@ -52,11 +52,4 @@ public class Oeuvre {
         this.dateParution = dateParution;
     }
 
-    public void ajouterReservation(){
-        this.setNbResa(this.getNbResa()+1);
-    }
-
-    public void enleverReservation(){
-        this.setNbResa(this.getNbResa()-1);
-    }
-}
+   }
