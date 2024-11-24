@@ -42,11 +42,6 @@ public class IhmBackOffice {
         return "listeUsagers";
     }
 
-/*    @PostMapping("/supprimerUsager")
-    public String supprimerUsager(@RequestParam Long usagerId) {
-        gestionBackOffice.supprimerUsager(usagerId);
-        return "redirect:/liste-usagers";
-    }*/
 
     @PostMapping("/supprimerUsager")
     public String supprimerUsager(@RequestParam Long usagerId, Model model) {
@@ -210,9 +205,8 @@ public class IhmBackOffice {
 
 
 /* TODO :
-* Partager les fichiers back/front, usager, oeuvre, emprunt, reservations
+
 * gerer archivage/non archivage des emprunts
 * faire du reverse, regarder les differences, update visual paradigm en conséquence
-* regarder les endroits ou il manque de la mise en forme (ajouter un exemplaire par exemple)
 * gere les dates de facon constante
  */

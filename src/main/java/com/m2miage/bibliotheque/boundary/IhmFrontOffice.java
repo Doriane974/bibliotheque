@@ -146,9 +146,17 @@ public class IhmFrontOffice {
 
     @GetMapping("/liste-emprunts")
     public String afficherListeEmprunts(Model model) {
-        List<Emprunt> emprunts = gestionFrontOffice.obtenirTousEmprunts();
+        List<Emprunt> emprunts = gestionFrontOffice.obtenirTousEmprunts(false);
         model.addAttribute("emprunts", emprunts);
         return "listeEmprunts";
+    }
+
+
+    @GetMapping("/liste-emprunts-archives")
+    public String afficherListeEmpruntsArchives(Model model) {
+        List<Emprunt> emprunts = gestionFrontOffice.obtenirTousEmprunts(true);
+        model.addAttribute("emprunts", emprunts);
+        return "listeEmpruntsArchives";
     }
 
     @PostMapping("/rendreExemplaire")

@@ -79,8 +79,8 @@ public class GestionFrontOffice {
         Emprunt emprunt = new Emprunt(usager, exemplaire, LocalDate.now());
         empruntRepository.save(emprunt);
     }
-    public List<Emprunt> obtenirTousEmprunts(){
-        return empruntRepository.findAll(Sort.by(Sort.Direction.ASC,  "usager"));
+    public List<Emprunt> obtenirTousEmprunts(boolean archive){
+        return empruntRepository.findByArchive(archive, Sort.by(Sort.Direction.ASC,  "usager"));
 
     }
     public Emprunt obtenirEmprunt(Long empruntId){
@@ -88,7 +88,9 @@ public class GestionFrontOffice {
                 .orElseThrow(() -> new RuntimeException("Emprunt not found"));
     }
     public void supprimerEmprunt(Long empruntId){
-        empruntRepository.deleteById(empruntId);
+        Emprunt emprunt = empruntRepository.findById(empruntId).orElseThrow(() -> new RuntimeException("Emprunt not found"));
+        emprunt.setArchive(true);
+        //empruntRepository.deleteById(empruntId);
     }
 
 }
