@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
-    List<Reservation> findByOeuvreId(Long oeuvreId);
     Optional<Reservation> findByUsagerAndOeuvre(Usager usager, Oeuvre oeuvre);
     List<Reservation> findByUsagerId(Long usagerId);
     List<Reservation> findAll(Sort sort);

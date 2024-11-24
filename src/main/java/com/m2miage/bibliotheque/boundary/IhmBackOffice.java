@@ -205,8 +205,6 @@ public class IhmBackOffice {
 
 
 /* TODO :
-
-* gerer archivage/non archivage des emprunts
 * faire du reverse, regarder les differences, update visual paradigm en conséquence
 * gere les dates de facon constante
  */

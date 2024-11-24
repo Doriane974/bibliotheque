@@ -32,7 +32,6 @@ public class Emprunt {
         this.usager = usager;
         this.exemplaire = exemplaire;
         this.exemplaire.setDisponibilite("indisponible");
-        //annuler une reservation pour cette oeuvre si l'usager qui emprunte avait fait une reservation pour cette oeuvre
         this.jourDebut = jourDebut;
         this.jourFin = DateJour.addDuration(jourDebut, 0,1,0);
         this.archive = false;
@@ -57,25 +56,8 @@ public class Emprunt {
     public void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
     }
-    public LocalDate getJourDebut() {
-        return jourDebut;
-    }
-    public void setJourDebut(LocalDate jourDebut) {
-        this.jourDebut = jourDebut;
-    }
-    public LocalDate getJourFin() {
-        return jourFin;
-    }
-    public void setJourFin(LocalDate jourFin) {
-        this.jourFin = jourFin;
-    }
-    public boolean isArchive() {
-        return archive;
-    }
     public void setArchive(boolean archive) {
         this.archive = archive;
     }
-    public void archiverEmprunt(){
-        this.setArchive(true);
-    }
+
 }

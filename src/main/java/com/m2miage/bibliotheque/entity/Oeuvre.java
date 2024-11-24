@@ -52,38 +52,6 @@ public class Oeuvre {
         this.dateParution = dateParution;
     }
 
-    /*public int getNbReservation() {
-        return nbReservation;
-    }*/
-
-    /*public void setNbReservation(int nbReservation) {
-        this.nbReservation = nbReservation;
-    }*/
-
-    public void supprimer(){
-        /*if(nbReservation == 0){
-            //Supprimer tous les exemplaires
-        }
-        else{
-            System.out.println("On ne peut pas supprimer cette oeuvre : un exemplaire est encore emprunté par un usager.");
-        }
-        //supprimer tous les exemplaires associé a cette oeuvre, seulement si nbReservaton est egal a 0
-        */
-    }
-
-
-    static Oeuvre identification(String titre){
-        //if(this.titre == titre){
-        //    return this;
-        //}
-        return new Oeuvre();
-    }
-
-    static boolean estDisponible(){
-        //return nbReservation<nbExemplaire && nbExemplaire>0;
-        return false;
-    }
-
     public void ajouterReservation(){
         this.setNbResa(this.getNbResa()+1);
     }

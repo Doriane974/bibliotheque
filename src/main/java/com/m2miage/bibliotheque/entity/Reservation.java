@@ -24,14 +24,11 @@ public class Reservation {
     private LocalDate date;
 
     public Reservation() {}
-
-    public Reservation(Oeuvre oeuvre, Usager usager, LocalDate date){
-        this.oeuvre = oeuvre;
-        this.usager = usager;
+    public Reservation(Usager usager, Oeuvre oeuvre, LocalDate date){
+        this.usager=usager;
+        this.oeuvre=oeuvre;
         this.date = date;
-        this.oeuvre.ajouterReservation();
     }
-
     public Long getId() {
         return id;
     }
@@ -64,13 +61,6 @@ public class Reservation {
         this.date = date;
     }
 
-    public void annulerReservation(){
-        this.getOeuvre().enleverReservation();
-        this.setDate(null);
-        this.setUsager(null);
-        this.setOeuvre(null);
-
-    }
 
 
 

@@ -40,10 +40,10 @@ public class GestionFrontOffice {
         }
 
         // Create new reservation
-        Reservation reservation = new Reservation();
-        reservation.setUsager(usager);
-        reservation.setOeuvre(oeuvre);
-        reservation.setDate(LocalDate.now());
+        Reservation reservation = new Reservation(usager, oeuvre, LocalDate.now());
+        //reservation.setUsager(usager);
+        //reservation.setOeuvre(oeuvre);
+        //reservation.setDate(LocalDate.now());
 
         reservationRepository.save(reservation);
 
@@ -72,10 +72,7 @@ public class GestionFrontOffice {
     ////////////////////////////////////////
 
     public void creerEmprunt(Usager usager, Exemplaire exemplaire) {
-        // Set the availability of the exemplaire to "indisponible"
         exemplaire.setDisponibilite("indisponible");
-
-        // Create a new Emprunt object
         Emprunt emprunt = new Emprunt(usager, exemplaire, LocalDate.now());
         empruntRepository.save(emprunt);
     }
@@ -90,7 +87,6 @@ public class GestionFrontOffice {
     public void supprimerEmprunt(Long empruntId){
         Emprunt emprunt = empruntRepository.findById(empruntId).orElseThrow(() -> new RuntimeException("Emprunt not found"));
         emprunt.setArchive(true);
-        //empruntRepository.deleteById(empruntId);
     }
 
 }

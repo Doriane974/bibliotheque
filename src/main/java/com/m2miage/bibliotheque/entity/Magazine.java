@@ -20,23 +20,4 @@ public class Magazine extends Oeuvre {
         this.numero = numero;
     }
 
-    //public void supprimer() {
-    //}
-
-    public String getRevue() {
-        return revue;
-    }
-
-    public void setRevue(String revue) {
-        this.revue = revue;
-    }
-
-    // Getters et Setters
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
 }

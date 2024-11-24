@@ -18,24 +18,6 @@ public class Livre extends Oeuvre {
         this.auteur = auteur;
         this.edition = edition;
     }
-    public void supprimer() {
-        // Implémentation de la méthode pour supprimer un livre
-    }
+    //public void supprimer() {}
 
-    // Getters et Setters
-    public String getEdition() {
-        return edition;
-    }
-
-    public void setEdition(String edition) {
-        this.edition = edition;
-    }
-
-    public String getAuteur() {
-        return auteur;
-    }
-
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
 }

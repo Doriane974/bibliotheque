@@ -13,7 +13,6 @@ public class Usager {
     private String nom;
     private String prenom;
 
-    // Constructeurs, getters et setters
     public Usager() {}
 
     public Usager(String nom, String prenom) {
@@ -44,5 +43,5 @@ public class Usager {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-// Getters et setters
+
 }
