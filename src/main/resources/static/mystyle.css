@@ -1,0 +1,196 @@
+:root {
+    --main-text-color: #673119;
+    --highlight-bg: #673119;
+    --background-light: #EEE2DD;
+    --card-bg: #EEE2DD;
+    --text-bg: #F7F3F3;
+    --button-bg: #E2D0C0;
+    --button-hover-bg: #D2B69D;
+    --heading-color: #673119;
+    --border-highlight-color: #673119;
+    --default-font-size: 1rem;
+    --focus-outline-color: #673119;
+    --default-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    --default-button-width: 15.625rem;
+}
+
+:focus {
+    outline: 0.0875rem solid var(--focus-outline-color);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 3.125rem;
+    background: url('https://cdn.discordapp.com/attachments/689158065362042901/1310363987073962054/libraryDarkAcademia-transformed.jpeg?ex=6744f30f&is=6743a18f&hm=7009eaaa9a8fe4b75cf5c4d6b6766d9c4f134cd2d18c094a75e1f0f5bcc83b41&') no-repeat center center fixed;
+    background-size: cover;
+    background-color: var(--background-light);
+    font-size: var(--default-font-size);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Places it behind all other content */
+    background: rgba(238, 226, 221, 0.8); /* Controls the lightness of the image */
+}
+
+h1 {
+    color: var(--heading-color);
+    margin-bottom: 1.875rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    box-shadow: var(--default-shadow);
+    border-radius: 0.625rem;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.9375rem;
+    text-align: left;
+    font-size: var(--default-font-size);
+    color: var(--main-text-color);
+}
+
+th {
+    background-color: var(--button-bg);
+    font-weight: bold;
+}
+
+td {
+    border-bottom: 0.0625rem solid var(--highlight-bg);
+}
+
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+button {
+    padding: 0.9375rem 1.875rem;
+    font-size: var(--default-font-size);
+    margin: 0.3125rem;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--main-text-color);
+    border: none;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s;
+    width: var(--default-button-width);
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0.3125rem 0.625rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.125rem) scale(1.05);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+@keyframes bump {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button:active {
+    animation: bump 0.3s ease-in-out;
+}
+
+button:focus {
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
+}
+
+select {
+    padding: 0.9375rem;
+    font-size: var(--default-font-size);
+    margin: 0.625rem 0;
+    background-color: var(--card-bg);
+    color: var(--main-text-color);
+    border: 0.125rem solid var(--button-bg);
+    border-radius: 0.3125rem;
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+select:focus {
+    border-color: var(--border-highlight-color);
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
+}
+
+option {
+    color: var(--main-text-color);
+}
+
+form {
+    background-color: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    box-shadow: var(--default-shadow);
+    display: inline-block;
+    color: var(--main-text-color);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
+    }
+}
+
+input[type="text"] {
+    background-color: var(--text-bg);
+}
+
+input[type="text"]:focus {
+    border-color: var(--border-highlight-color);
+    animation: pulse 1s infinite;
+
+}
+
+input[type="submit"] {
+    padding: 0.9375rem 1.875rem;
+    font-size: var(--default-font-size);
+    margin: 0.625rem;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--main-text-color);
+    border: none;
+    border-radius: 0.3125rem;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--button-hover-bg);
+}
+
+input[type="submit"]:focus {
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.2);
+}
